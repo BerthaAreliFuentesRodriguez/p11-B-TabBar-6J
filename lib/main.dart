@@ -1,41 +1,71 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(AppTabBar());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  // This widget is the root of your application.
+class AppTabBar extends StatelessWidget {
+  const AppTabBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        // useMaterial3: true,
-        primarySwatch: Colors.blue,
-      ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      title: "Ejemplo TabBar",
+      theme: ThemeData(primarySwatch: Colors.cyan),
+      home: MiPaginaInicial(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
+class MiPaginaInicial extends StatefulWidget {
+  const MiPaginaInicial({Key? key}) : super(key: key);
 
   @override
+  State<MiPaginaInicial> createState() => _MiPaginaInicialState();
+}
+
+class _MiPaginaInicialState extends State<MiPaginaInicial> {
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Tienda de comics Bertha Fuentes",
+          ),
+          bottom: TabBar(tabs: [
+            Tab(
+              text: "Comic",
+              icon: Icon(Icons.auto_stories_outlined),
+            ),
+            Tab(
+              text: "Contac",
+              icon: Icon(Icons.call_sharp),
+            ),
+            Tab(
+              text: "Comp",
+              icon: Icon(Icons.add_shopping_cart),
+            ),
+            Tab(
+              text: "Ubi",
+              icon: Icon(Icons.add_location_outlined),
+            ),
+            Tab(
+              text: "User",
+              icon: Icon(Icons.co_present_rounded),
+            ),
+          ] //Texto Icono
+              ),
+        ),
+        body: TabBarView(
+          children: const <Widget>[
+            Icon(Icons.auto_stories_outlined, size: 200, color: Colors.brown),
+            Icon(Icons.call_sharp, size: 200, color: Color(0xff147a4b)),
+            Icon(Icons.add_shopping_cart, size: 200, color: Color(0xff3071a8)),
+            Icon(Icons.add_location_outlined,
+                size: 200, color: Color(0xff77324c)),
+            Icon(Icons.co_present_rounded, size: 200, color: Color(0xff827a35)),
+          ],
         ),
       ),
     );
